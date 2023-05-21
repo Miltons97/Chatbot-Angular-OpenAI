@@ -1,34 +1,29 @@
 <div class="container-g">
-
   <div class="card-g">
-
     <div class="card-p">
-
-      <h1 class="card-header bg-dark text-ligth" >Sherlock-Chatbot</h1>
-
+      <h1 class="card-header bg-dark text-light">Sherlock-Chatbot</h1>
     </div>
-
-    <div class="card.body">
-
-      <div class="container-box">
-
-        <div class="row">
-
-          <div class="col-12 respuesta">
-
+    <div class="card-body">
+      <div class="chat-container">
+        <div class="chat-messages" #chatMessagesContainer>
+          <div *ngFor="let chatMessage of chatMessages">
+            <p [ngClass]="{'user-message': chatMessage.role === 'user', 'bot-message': chatMessage.role === 'assistant'}">
+              {{ chatMessage.content }}
+            </p>
           </div>
-
-
         </div>
-
+        <input [(ngModel)]="message" class="form-input" name="message" placeholder="Haz tu consulta aquí...">
+        <button class="btn btn-outline-primary mt-2 mr-2" (click)="sendMessage()">Enviar</button>
+        <button class="btn btn-outline-danger mt-2" (click)="borrar()">Borrar</button>
       </div>
-
-      <input [(ngModel)]="message" class="form-input" name="message" placeholder="Has tu consulta aqui...">
-      <button class="btn btn-outline-primary mt-2 mr-2" (click)="sendMessage()">Enviar</button>
-      <button class="btn btn-outline-danger mt-2 " (click)="borrar()">Borrar</button>
-
     </div>
-
   </div>
-
+  <div class="chat-history">
+    <h2 class="card-header bg-dark text-ligth chat-title">Historial de Chats</h2>
+    <div *ngFor="let chatMessage of chatHistory" class="chat-history-message">
+      <p [ngClass]="{'user-message': chatMessage.role === 'user', 'bot-message': chatMessage.role === 'assistant'}">
+        {{ chatMessage.content }}
+      </p>
+    </div>
+  </div>
 </div>
